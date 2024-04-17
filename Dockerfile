@@ -1,8 +1,8 @@
 # syntax=docker/dockerfile:1
 
-FROM node:18-alpine
+FROM python:3.9.18-alpine3.18
+RUN pip install flask
+COPY ./app /app
 WORKDIR /app
-COPY . .
-RUN yarn install --production
-CMD ["node", "src/index.js"]
-EXPOSE 3000
+CMD flask run
+EXPOSE 5000
