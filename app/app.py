@@ -8,7 +8,8 @@ app = Flask(__name__)
 
 # Function to compute Hamming distance between two hashes
 def hamming_distance(hash1, hash2):
-    return bin(int(hash1, 16) ^ int(hash2, 16)).count('1')
+    #return bin(int(hash1, 16) ^ int(hash2, 16)).count('1')
+    return (hash1 - hash2)
 
 # Function to compare uploaded image hash with stored hashes
 def compare_hashes(uploaded_hash, threshold=10):
