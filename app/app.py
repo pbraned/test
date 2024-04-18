@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
 from imagehash import phash
 import os
+from PIL import Image
+
 
 app = Flask(__name__)
 
@@ -37,7 +39,8 @@ def upload():
         uploaded_image_path = os.path.join('uploads', uploaded_file.filename)
         uploaded_file.save(uploaded_image_path)
         # Generate perceptual hash for uploaded image
-        uploaded_hash = str(phash(uploaded_image_path))
+        uploaded_hash = str(phash(Image.open(uploaded_image_path)))
+
         # Compare with stored hashes
         similar_hashes = compare_hashes(uploaded_hash, threshold)
         # If uploaded hash doesn't exist, append to stored hashes
