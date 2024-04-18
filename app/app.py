@@ -2,7 +2,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import os
 from werkzeug.utils import secure_filename
-from your_script import process_image
+from hash import get_hash
 
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
@@ -32,7 +32,7 @@ def upload_file():
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
         # Call the process_image function from your_script.py
-        result = process_image(filepath)
+        result = get_hash(filepath)
         flash(result)
         return redirect(url_for('index'))
     else:
