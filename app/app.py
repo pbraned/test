@@ -19,6 +19,11 @@ def compare_hashes(uploaded_hash, threshold=10):
                 similar_hashes.append((stored_hash, distance))
     return similar_hashes
 
+# Function to append new hash to the stored hashes file
+def append_to_hashes(uploaded_hash):
+    with open('stored_hashes.txt', 'a') as file:
+        file.write(uploaded_hash + '\n')
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -35,6 +40,9 @@ def upload():
         uploaded_hash = str(phash(uploaded_image_path))
         # Compare with stored hashes
         similar_hashes = compare_hashes(uploaded_hash, threshold)
+        # If uploaded hash doesn't exist, append to stored hashes
+        if not similar_hashes:
+            append_to_hashes(uploaded_hash)
         return render_template('results.html', similar_hashes=similar_hashes)
     else:
         return render_template('index.html', error='Please upload an image file.')
