@@ -2,7 +2,7 @@ from PIL import Image
 import imagehash
 import sys
 
-def process_arguments(arg1, arg2, arg3):
+def get_hash(arg1, arg2, arg3):
     # Your script logic here
 
     hashmethod = arg1
@@ -23,12 +23,12 @@ def process_arguments(arg1, arg2, arg3):
         hashfunc = imagehash.crop_resistant_hash
 
     hash = hashfunc(Image.open(arg2))
-    otherhash = hashfunc(Image.open(arg3))
+    #otherhash = hashfunc(Image.open(arg3))
     #print(hash)
     #print(otherhash)
-    hamm = hash - otherhash
+    #hamm = hash - otherhash
 
     #if hamm <= int(sys.argv[4]):
     #  print(sys.argv[2] + " and "+ sys.argv[3] + " = "+ str(hamm))  # hamming distance
 
-    return hamm
+    return hash
