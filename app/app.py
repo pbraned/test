@@ -40,7 +40,7 @@ def upload():
         uploaded_image_path = os.path.join('uploads', uploaded_file.filename)
         uploaded_file.save(uploaded_image_path)
         # Generate perceptual hash for uploaded image
-        uploaded_hash = str(phash(Image.open(uploaded_image_path)))
+        uploaded_hash = phash(Image.open(uploaded_image_path))
 
         # Compare with stored hashes
         similar_hashes = compare_hashes(uploaded_hash, threshold)
